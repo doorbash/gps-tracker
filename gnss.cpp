@@ -1,8 +1,7 @@
 #include "gnss.h"
 // #include "serial_handler.h"
 
-static char* Gnss::parseGnsInf(char *gnsinf) {
-  char data[100];
+static bool Gnss::parseGnsInf(char *gnsinf, char *data) {
   // SerialHandler::debug("parseGnsInf: trying to parse: %s", gnsinf);
   char *b = gnsinf;
   char *temp;
@@ -16,18 +15,18 @@ static char* Gnss::parseGnsInf(char *gnsinf) {
 
   temp = strsep(&b, ",");
   if (temp == NULL || *temp == 0) {
-    return NULL;
+    return false;
   }
   strsep(&b, ",");  // fix status
 
   datetime_str = strsep(&b, ",");
   if (datetime_str == NULL || *datetime_str == 0) {
-    return NULL;
+    return false;
   }
 
   latitude_str = strsep(&b, ",");
   if (latitude_str == NULL || *latitude_str == 0) {
-    return NULL;
+    return false;
   }
 
   longitude_str = strsep(&b, ",");
@@ -37,7 +36,7 @@ static char* Gnss::parseGnsInf(char *gnsinf) {
 
   altitude_str = strsep(&b, ",");
   if (altitude_str == NULL || *altitude_str == 0) {
-    return NULL;
+    return false;
   }
 
   strsep(&b, ",");  // speed
@@ -47,17 +46,17 @@ static char* Gnss::parseGnsInf(char *gnsinf) {
 
   hdop_str = strsep(&b, ",");
   if (hdop_str == NULL || *hdop_str == 0) {
-    return NULL;
+    return false;
   }
 
   pdop_str = strsep(&b, ",");
   if (pdop_str == NULL || *pdop_str == 0) {
-    return NULL;
+    return false;
   }
 
   vdop_str = strsep(&b, ",");
   if (vdop_str == NULL || *vdop_str == 0) {
-    return NULL;
+    return false;
   }
 
   sprintf(
@@ -71,6 +70,4 @@ static char* Gnss::parseGnsInf(char *gnsinf) {
     hdop_str,
     pdop_str,
     vdop_str);
-
-  return data;
 }

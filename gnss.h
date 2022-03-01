@@ -6,7 +6,7 @@
 
 class Gnss {
   public:
-    static char* parseGnsInf(char *gnsinf);
+    static bool Gnss::parseGnsInf(char *gnsinf, char *data);
 };
 
 #endif

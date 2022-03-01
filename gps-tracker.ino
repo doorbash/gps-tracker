@@ -18,6 +18,21 @@ void zzz() {
 void setup() {
   serial.init();
 
+  if (SERIAL_TX_BUFFER_SIZE != 256 || SERIAL_RX_BUFFER_SIZE != 256) {
+    while (true) {
+      SerialHandler::debug("please set hardware serial rx/tx buffer size to 256");
+      delay(1000);
+    }
+  }
+#ifdef SOFTWARE_SERIAL
+  if (_SS_MAX_RX_BUFF != 256) {
+    while (true) {
+      SerialHandler::debug("please set software serial rx buffer size to 256");
+      delay(1000);
+    }
+  }
+#endif
+
   ADCSRA = 0;
 
   delay(1000);
@@ -39,15 +54,15 @@ void loop() {
   serial.command("AT+CGNSSEQ=GGA");
   delay(500);
 
-  char *parsedGnsInfData;
+  char data[100];
   int i = 0;
   for (; i < 5; i++) {
     serial.command("AT+CGNSINF");
     delay(1000);
-    if ((parsedGnsInfData = Gnss::parseGnsInf(serial.gnsinf)) == NULL) {
-      break;
-    }
-    SerialHandler::debug("gps data was trash...");
+    bool result = Gnss::parseGnsInf(serial.gnsinf, data);
+    serial.gnsinf[0] = 0;
+    if (result) break;
+    SerialHandler::debug("gps data is trash...");
     delay(6000);
   }
 
@@ -82,9 +97,9 @@ void loop() {
     "AT+HTTPPARA=\"CONTENT\",\"application/x-www-form-urlencoded\"");
   delay(500);
 
-  serial.command("AT+HTTPDATA=%d,3000", strlen(parsedGnsInfData));
+  serial.command("AT+HTTPDATA=%d,3000", strlen(data));
   delay(500);
-  serial.command(parsedGnsInfData);
+  serial.command(data);
   delay(3000);
 
   serial.command("AT+HTTPACTION=1");

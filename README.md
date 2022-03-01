@@ -35,7 +35,7 @@ Create `config.h`:
 #define SS_RX_PIN 7
 #define SS_TX_PIN 8
 #define BACKEND_URL "http://your.domain.com/gps-tracker/"
-#define HTTPSSL
+// #define HTTPSSL
 #define DEVICE_ID "00000000000000000000"
 ```
 
