@@ -7,8 +7,8 @@ SerialHandler::SerialHandler(int baudRate) {
 }
 
 void SerialHandler::init() {
-#if defined(SOFTWARE_SERIAL)
-#if defined(DEBUG_MODE)
+#ifdef SOFTWARE_SERIAL
+#ifdef DEBUG_MODE
   Serial.begin(baudRate);
 #endif
   module = &ss;
@@ -21,8 +21,8 @@ void SerialHandler::init() {
 
 void SerialHandler::send(char *text) {
   module->println(text);
-#if defined(DEBUG_MODE)
-#if defined(SOFTWARE_SERIAL)
+#ifdef DEBUG_MODE
+#ifdef SOFTWARE_SERIAL
   Serial.println(text);
 #endif
 #endif
@@ -40,7 +40,7 @@ void SerialHandler::receive() {
       if (strstr(buffer, "+CGNSINF") == buffer) {
         strcpy(gnsinf, buffer);
       }
-#if defined(DEBUG_MODE)
+#ifdef DEBUG_MODE
       Serial.print("> ");
       Serial.println(buffer);
 #endif
@@ -51,11 +51,11 @@ void SerialHandler::receive() {
 }
 
 void SerialHandler::command(char *text) {
-  while (module->available()) module->read();
+  while (module->available())
+    module->read();
   send(text);
   unsigned long current_time = millis();
-  while (module->available() == 0 && millis() - current_time < 3000)
-    ;
+  while (module->available() == 0 && millis() - current_time < 3000);
   delay(1000);
   receive();
 }
@@ -70,7 +70,7 @@ void SerialHandler::command(const char *format, ...) {
 }
 
 static void SerialHandler::debug(char *text) {
-#if defined(DEBUG_MODE)
+#ifdef DEBUG_MODE
   Serial.println(text);
 #endif
 }

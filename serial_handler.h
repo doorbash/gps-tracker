@@ -3,7 +3,7 @@
 
 #include "config.h"
 #include <Arduino.h>
-#if defined(SOFTWARE_SERIAL)
+#ifdef SOFTWARE_SERIAL
 #include <SoftwareSerial.h>
 #endif
 
@@ -11,7 +11,7 @@ class SerialHandler {
   private:
     int baudRate;
     Stream *module;
-#if defined(SOFTWARE_SERIAL)
+#ifdef SOFTWARE_SERIAL
     SoftwareSerial ss {SS_RX_PIN, SS_TX_PIN};
 #endif
     char buffer[MAX_BUFFER_SIZE];
@@ -20,7 +20,7 @@ class SerialHandler {
   public:
     char gnsinf[200];
 
-    SerialHandler(int br);
+    SerialHandler(int baudRate);
     void init();
     void send(char *text);
     void receive();

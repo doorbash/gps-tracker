@@ -7,7 +7,7 @@ SerialHandler serial(BAUD_RATE_SERIAL);
 
 void zzz() {
   SerialHandler::debug("Good Night!");
-#if defined(DEBUG_MODE)
+#ifdef DEBUG_MODE
   delay(1000);
 #endif
   for (int i = 0; i < 2; i++) {
