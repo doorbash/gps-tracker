@@ -1,6 +1,6 @@
-**Config:**
+### Config:
 
-- Edit `<arduino ide directory>\hardware\arduino\avr\cores\arduino\HardwareSerial.h`
+Edit `<arduino ide directory>/hardware/arduino/avr/cores/arduino/HardwareSerial.h`
 
 Change:
 ```
@@ -14,7 +14,7 @@ To:
 #define SERIAL_RX_BUFFER_SIZE 256
 ```
 
-- Edit `<arduino ide directory>\hardware\arduino\avr\libraries\SoftwareSerial\src\SoftwareSerial.h`:
+Edit `<arduino ide directory>/hardware/arduino/avr/libraries/SoftwareSerial/src/SoftwareSerial.h`:
 
 Change:
 ```
@@ -26,7 +26,7 @@ To:
 #define _SS_MAX_RX_BUFF 256
 ```
 
-- Create `config.h`:
+Create `config.h`:
 ```
 #define SOFTWARE_SERIAL
 #define DEBUG_MODE
