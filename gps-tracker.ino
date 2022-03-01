@@ -7,6 +7,9 @@ SerialHandler serial(BAUD_RATE_SERIAL);
 
 void zzz() {
   SerialHandler::debug("Good Night!");
+#if defined(DEBUG_MODE)
+  delay(1000);
+#endif
   for (int i = 0; i < 2; i++) {
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);
   }
@@ -66,10 +69,10 @@ void loop() {
   // send location to server
   serial.command("AT+HTTPINIT");
   delay(500);
-  if (HTTPSSL) {
-    serial.command("AT+HTTPSSL=1");
-    delay(500);
-  }
+#ifdef HTTPSSL
+  serial.command("AT+HTTPSSL=1");
+  delay(500);
+#endif
   serial.command("AT+HTTPPARA=\"CID\",1");
   delay(500);
   serial.command(

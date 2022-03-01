@@ -1,8 +1,7 @@
 #ifndef SERIAL_HANDLER
 #define SERIAL_HANDLER
 
-#define MAX_BUFFER_SIZE 200
-
+#include "config.h"
 #include <Arduino.h>
 #if defined(SOFTWARE_SERIAL)
 #include <SoftwareSerial.h>

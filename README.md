@@ -30,11 +30,13 @@ Create `config.h`:
 ```
 #define SOFTWARE_SERIAL
 #define DEBUG_MODE
+#define MAX_BUFFER_SIZE 200
 #define BAUD_RATE_SERIAL 9600
 #define SS_RX_PIN 7
 #define SS_TX_PIN 8
-#define BACKEND_URL "http://****************/gps-tracker/"
-#define HTTPSSL false
+#define BACKEND_URL "http://your.domain.com/gps-tracker/"
+#define HTTPSSL
+#define DEVICE_ID "00000000000000000000"
 ```
 
 ### Todo:

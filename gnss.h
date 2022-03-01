@@ -1,6 +1,7 @@
 #ifndef GNSS
 #define GNSS
 
+#include "config.h"
 #include <Arduino.h>
 
 class Gnss {

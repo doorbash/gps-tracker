@@ -1,4 +1,5 @@
 #include "gnss.h"
+// #include "serial_handler.h"
 
 static char* Gnss::parseGnsInf(char *gnsinf) {
   char data[100];
@@ -59,9 +60,17 @@ static char* Gnss::parseGnsInf(char *gnsinf) {
     return NULL;
   }
 
-  sprintf(data, "dt=%s&lat=%s&lng=%s&alt=%s&hdop=%s&pdop=%s&vdop=%s",
-          datetime_str, latitude_str, longitude_str, altitude_str, hdop_str,
-          pdop_str, vdop_str);
+  sprintf(
+    data,
+    "did=%s&dt=%s&lat=%s&lng=%s&alt=%s&hdop=%s&pdop=%s&vdop=%s",
+    DEVICE_ID,
+    datetime_str,
+    latitude_str,
+    longitude_str,
+    altitude_str,
+    hdop_str,
+    pdop_str,
+    vdop_str);
 
   return data;
 }
