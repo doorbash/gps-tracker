@@ -36,3 +36,7 @@ Create `config.h`:
 #define BACKEND_URL "http://****************/gps-tracker/"
 #define HTTPSSL false
 ```
+
+### Todo:
+- [ ] Add better sleep mode (to make it more energy efficient)
+- [ ] Add device hash id
