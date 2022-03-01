@@ -54,7 +54,7 @@ void loop() {
   serial.command("AT+CGNSSEQ=GGA");
   delay(500);
 
-  char data[100];
+  char data[150];
   int i = 0;
   for (; i < 5; i++) {
     serial.command("AT+CGNSINF");

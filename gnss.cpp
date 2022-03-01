@@ -70,4 +70,6 @@ static bool Gnss::parseGnsInf(char *gnsinf, char *data) {
     hdop_str,
     pdop_str,
     vdop_str);
+
+  return true;
 }
