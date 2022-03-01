@@ -40,5 +40,5 @@ Create `config.h`:
 ```
 
 ### Todo:
-- [ ] Add better sleep mode (to make it more energy efficient)
 - [x] Add device id
+- [ ] Add better sleep mode (to make it more energy efficient)
