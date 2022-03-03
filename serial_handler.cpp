@@ -34,7 +34,7 @@ void SerialHandler::receive() {
   while (module->available()) {
     char c = module->read();
     if (c == '\r') continue;
-    if (c == '\n' || bufferIndex >= baudRate - 1) {
+    if (c == '\n' || bufferIndex >= MAX_BUFFER_SIZE - 1) {
       buffer[bufferIndex] = 0;
       bufferIndex = 0;
       if (strstr(buffer, "+CGNSINF") == buffer) {
