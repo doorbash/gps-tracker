@@ -2,20 +2,16 @@
 
 #include <Arduino.h>
 
-SerialHandler::SerialHandler(int baudRate) {
-  this->baudRate = baudRate;
-}
-
 void SerialHandler::init() {
 #ifdef SOFTWARE_SERIAL
 #ifdef DEBUG_MODE
-  Serial.begin(baudRate);
+  Serial.begin(BAUD_RATE_SERIAL);
 #endif
   module = &ss;
-  ss.begin(baudRate);
+  ss.begin(BAUD_RATE_SERIAL);
 #else
   module = &Serial;
-  Serial.begin(baudRate);
+  Serial.begin(BAUD_RATE_SERIAL);
 #endif
 }
 

@@ -9,7 +9,6 @@
 
 class SerialHandler {
   private:
-    int baudRate;
     Stream *module;
 #ifdef SOFTWARE_SERIAL
     SoftwareSerial ss {SS_RX_PIN, SS_TX_PIN};
@@ -20,7 +19,6 @@ class SerialHandler {
   public:
     char gnsinf[200];
 
-    SerialHandler(int baudRate);
     void init();
     void send(char *text);
     void receive();

@@ -3,7 +3,7 @@
 #include "serial_handler.h"
 #include "gnss.h"
 
-SerialHandler serial(BAUD_RATE_SERIAL);
+SerialHandler serial;
 
 void zzz() {
   SerialHandler::debug("Good Night!");
